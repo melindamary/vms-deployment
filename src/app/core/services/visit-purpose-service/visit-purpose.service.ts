@@ -2,6 +2,7 @@ import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
+import {URL} from '../../environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class VisitPurposeService {
     @Inject(PLATFORM_ID) private platformId: Object,
   ) { }
 
-  baseUrl = 'https://localhost:7121';
+  baseUrl = URL;
   visitPurposes:any[] = [];
 
   fetchVisitPurposes(): Observable<any>{

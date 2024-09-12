@@ -5,12 +5,13 @@ import { VisitorLogResponse, VisitorLogResult } from '../../models/visitor-log.i
 import { VisitorPassCodeDTO } from '../../models/visitor-pass-code.interface';
 import { isPlatformBrowser } from '@angular/common';
 import { SharedService } from '../shared-service/shared-data.service.service';
+import {URL} from '../../environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VisitorLogService {
-  private apiUrl = 'https://localhost:7121/VisitorLog';
+  private apiUrl = `${URL}/VisitorLog`;
 
   constructor(
     private sharedDataService : SharedService,

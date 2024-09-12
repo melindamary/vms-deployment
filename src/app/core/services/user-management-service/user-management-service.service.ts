@@ -7,6 +7,7 @@ import { AddNewUser } from '../../models/addNewUser.interface';
 import { UserByIdOverview, UserOverview, UserOverviewTransformed } from '../../models/user-overview-display.interface';
 import { response } from 'express';
 import { CheckUsernameResponse } from '../../models/check-Username.Interface';
+import {URL} from '../../environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class UserManagementServiceService {
   username:string = ''
 
   getRoleIdAndName(): Observable<GetIdAndName[]> {
-    const apiUrl = "https://localhost:7121/Role/GetRoleIdAndName/get-role-id-name";
+    const apiUrl = `${URL}/Role/GetRoleIdAndName/get-role-id-name`;
     return this.http.get<{ $id: string; $values: GetIdAndName[] }>(apiUrl).pipe(
       map(response => response.$values)
     );
@@ -26,14 +27,14 @@ export class UserManagementServiceService {
   }
 
   getLocationIdAndName(): Observable<GetIdAndName[]> {
-    const apiUrl = "https://localhost:7121/Location/GetLocationIdAndName";
+    const apiUrl = `${URL}/Location/GetLocationIdAndName`;
     return this.http.get<{ $id: string; $values: GetIdAndName[] }>(apiUrl).pipe(
       map(response => response.$values)
     );
   }
 
   getAllUser(): Observable<UserOverviewTransformed[]> {
-    const apiUrl = "https://localhost:7121/User/GetAllUsersOverview";
+    const apiUrl = `${URL}/User/GetAllUsersOverview`;
     return this.http.get<{ $id: string; $values: UserOverview[] }>(apiUrl).pipe(
       map(response => response.$values.map(user => ({
         userId: user.userId,
@@ -47,19 +48,19 @@ export class UserManagementServiceService {
   }
 
   checkUsernameExists(username: string): Observable<any> {
-    return this.http.get<any>(`https://localhost:7121/User/CheckUsernameExists/${username}`);
+    return this.http.get<any>(`${URL}/User/CheckUsernameExists/${username}`);
   }
 
   updateUserData(id:number, userData: any):Observable<any>{    
     console.log("recieved data",userData);
     
-      const url = `https://localhost:7121/User/UpdateUser/${id}`;
+      const url = `${URL}/User/UpdateUser/${id}`;
       return this.http.put<any>(url, userData);
     
   }
 
   getUserById(id: number): Observable<any> {
-    const apiUrl = `https://localhost:7121/User/GetUserById/${id}`;
+    const apiUrl = `${URL}/User/GetUserById/${id}`;
     return this.http.get<any>(apiUrl).pipe(
       map(response  => {
         console.log("data recieved",response);
@@ -70,7 +71,7 @@ export class UserManagementServiceService {
 
   postNewUser(newUser:AddNewUser):Observable<AddNewUser>{
     console.log("new user details",newUser);    
-    const apiUrl="https://localhost:7121/User/CreateNewUser";
+    const apiUrl=`${URL}/User/CreateNewUser`;
      return this.http.post<AddNewUser>(apiUrl,newUser);
 
   }

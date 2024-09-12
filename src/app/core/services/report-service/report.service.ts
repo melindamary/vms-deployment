@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import {URL} from '../../environment';
+
 @Injectable({
   providedIn: 'root',
 })

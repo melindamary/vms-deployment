@@ -4,12 +4,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Page, PagesResponse } from '../../models/page.interface';
 import { UpdateRolePagesDTO } from '../../models/update.interface';
 import { RoleOverview } from '../../models/RoleOverview.interface';
+import {URL} from '../../environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoleService {
-  // private Pageroles = 'https://localhost:7121/Page/GetPages';
+  // private Pageroles = `${URL}/Page/GetPages';
   // private role = 'your_api_base_url';
   // private apiUrl = 'your_api_base_url';
   // private roleIdSource = new BehaviorSubject<number>(0);
@@ -21,17 +22,17 @@ export class RoleService {
 
 
   constructor(private http: HttpClient) {}
-  private baseUrl = 'https://localhost:7121/AdminRole'; // Update with your actual base URL
+  private baseUrl = `${URL}/AdminRole`; // Update with your actual base URL
 
   getPages(): Observable<any> {
-    return this.http.get<any>('https://localhost:7121/AdminRole/GetPages/get-pages');
+    return this.http.get<any>(`${URL}/AdminRole/GetPages/get-pages`);
   }
  
   createRole(roleData: any): Observable<any> {
-    return this.http.post<any>(`https://localhost:7121/AdminRole/PostRole`, roleData);
+    return this.http.post<any>(`${URL}/AdminRole/PostRole`, roleData);
   }
   createPageControls(roleId: number, pageControls: any): Observable<any> {
-    return this.http.post(`https://localhost:7121/AdminRole/CreatePageControls?roleId=${roleId}`, pageControls);
+    return this.http.post(`${URL}/AdminRole/CreatePageControls?roleId=${roleId}`, pageControls);
   }
 
   updateRolePages(updateRolePagesDTO: UpdateRolePagesDTO): Observable<any> {

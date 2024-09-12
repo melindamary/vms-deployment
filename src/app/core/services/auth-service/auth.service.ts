@@ -5,6 +5,7 @@ import { Inject,Injectable, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { SharedService } from '../shared-service/shared-data.service.service';
+import {URL} from '../../environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AuthService {
     private sharedService: SharedService
   ) { }
 
-  baseUrl = 'https://localhost:7121';
+  baseUrl = URL;
   userRole:any = '';
 
   updateLogoutStatus():Observable<any>{
@@ -26,7 +27,7 @@ export class AuthService {
     var username = this.sharedService.getUsername();
     const body = { Username: username};
     console.log(body)
-    return this.http.put('https://localhost:7121/Auth/Logout', body);
+    return this.http.put(`${URL}/Auth/Logout`, body);
   }
 
   login(data: any):Observable<any>{

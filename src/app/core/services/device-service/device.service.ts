@@ -2,6 +2,7 @@ import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {URL} from '../../environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class DeviceService {
     @Inject(PLATFORM_ID) private platformId: Object,
   ) { }
 
-  baseUrl = 'https://localhost:7121';
+  baseUrl = URL;
   devices:any[] = [];
 
   fetchDevices(): Observable<any>{
