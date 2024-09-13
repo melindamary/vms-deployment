@@ -11,7 +11,7 @@ export class ReportService {
   constructor(private http: HttpClient, private datePipe: DatePipe) {}
   reports: any[] = [];
   result: any[] = [];
-  baseUrl = 'https://localhost:7121';
+  baseUrl = URL;
 
   fetchReport(): Observable<any> {
     var response = this.http.get(`${this.baseUrl}/Report/VisitorList`);
