@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
-import { HubConnectionBuilder } from '@microsoft/signalr';
+import { HttpTransportType, HubConnectionBuilder } from '@microsoft/signalr';
 import {BehaviorSubject } from 'rxjs';
 import { Subject } from 'rxjs';
 import {URL} from '../../environment';
@@ -36,7 +36,9 @@ export class SignalRService {
  
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${URL}/VisitorHub`)
+      .withUrl(`${URL}/VisitorHub`,{
+        transport: HttpTransportType.LongPolling
+      })
       .build();
 
       this.hubConnection.on('ReloadVisitorLog', () => {
